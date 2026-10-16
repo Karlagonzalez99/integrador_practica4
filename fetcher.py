@@ -1,23 +1,24 @@
-import pandas as pd
-import requests
 from math import ceil
 
-BASE_URL="http://20.228.134.116:8000/volcan"
-MAX_LIMIT_ORDENES=200
+import pandas as pd
+import requests
+
+BASE_URL = "http://20.228.134.116:8000/volcan"
+MAX_LIMIT_ORDENES = 200
+
 
 def get_num_batches(path: str):
 
-#SOLICITUD DE METADATA 
-    res = requests.get(f"{BASE_URL}{path}", params={'limit':1}).json()
-
-# EXTRAER TOTAL DE ITEMS 
+    # SOLICITUD DE METADATA
+    res = requests.get(f"{BASE_URL}{path}", params={"limit": 1}).json()
     print(res)
-    total: int = res["total"]  
+    total: int = res["total"]
 
-#CALCULAR CANTIDAD DE batchs
+    # CALCULAR CANTIDAD DE batchs
     num_batchs = ceil(total / MAX_LIMIT_ORDENES)
 
     return num_batchs
+
 
 def get_data(path: str):
     dfs = []
@@ -25,20 +26,39 @@ def get_data(path: str):
 
     for i in range(num_batchs):
         offset = i * MAX_LIMIT_ORDENES
-        params = {
-            "offset": offset,
-            "limit": MAX_LIMIT_ORDENES
-        }
+        params = {"offset": offset, "limit": MAX_LIMIT_ORDENES}
         print(f"{i}| obteniendo datos de {path} con: {params}")
 
-        res = requests.get(F"{BASE_URL}{path}", params=params).json()
-        print(res['total'])
+        res = requests.get(f"{BASE_URL}{path}", params=params).json()
+        print(res["total"])
 
-        #crear dataframe
+        # crear dataframe
         batch_df = pd.DataFrame(res["items"])
 
         dfs.append(batch_df)
 
-    df = pd.concat(dfs)   
+    df = pd.concat(dfs)
 
-    return df 
+    return df
+
+
+def main():
+    RAW_FOLDER = "./data/raw"
+
+    endpoints = [
+        "fincas",
+        "variedades",
+        "beneficios",
+        "cuadrillas",
+        "clima",
+        "lotes",
+        "procesamiento",
+        "subastas",
+        "embarques",
+]
+    for endpoint in endpoints:
+        df = get_data(f"/{endpoint}")
+        df.to_parquet(f"{RAW_FOLDER}/{endpoint}.parquet")
+
+if __name__ == "__main__":
+    main()

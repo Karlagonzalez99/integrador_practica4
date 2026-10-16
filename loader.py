@@ -3,6 +3,7 @@ from pathlib import Path
 
 import psycopg
 from dotenv import load_dotenv
+from urllib.parse import unquote
 from psycopg import sql
 
 _ = load_dotenv()
@@ -10,7 +11,7 @@ _ = load_dotenv()
 PGHOST = os.getenv("PGHOST")
 PGPORT = os.getenv("PGPORT", "5432")
 PGUSER = os.getenv("PGUSER")
-PGPASSWORD = os.getenv("PGPASSWORD")
+PGPASSWORD = unquote(os.getenv("PGPASSWORD", ""))
 PGSSLMODE = os.getenv("PGSSLMODE", "require")
 
 # Admin/maintenance database used to manage other databases
