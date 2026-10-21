@@ -1,0 +1,7 @@
+﻿.env
+.venv/
+__pycache__/
+dbt/logs/
+dbt/target/
+logs/
+dbt/.user.yml

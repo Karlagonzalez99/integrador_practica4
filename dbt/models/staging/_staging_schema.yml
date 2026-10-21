@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_fincas
+    columns:
+      - name: id_finca
+        data_tests: [unique, not_null]
+  - name: stg_variedades_cafe
+    columns:
+      - name: id_variedad
+        data_tests: [unique, not_null]
+  - name: stg_beneficios
+    columns:
+      - name: id_beneficio
+        data_tests: [unique, not_null]
+  - name: stg_clima_zonas_cafetaleras
+    columns:
+      - name: fecha
+        data_tests: [unique, not_null]
+  - name: stg_lotes_acopio
+    columns:
+      - name: id_lote
+        data_tests: [unique, not_null]
+      - name: puntaje_catacion_scaa
+        data_tests: [not_null]
+  - name: stg_procesamiento_beneficio
+    columns:
+      - name: id_proceso
+        data_tests: [unique, not_null]
+  - name: stg_embarques_exportacion
+    columns:
+      - name: id_embarque
+        data_tests: [unique, not_null]

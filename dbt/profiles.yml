@@ -1,4 +1,4 @@
-antojitos_transformations:
+  volcan_transformations:
   target: dev
   outputs:
     dev:
@@ -7,6 +7,6 @@ antojitos_transformations:
       user: "{{ env_var('PGUSER') }}"
       password: "{{ env_var('PGPASSWORD') }}"
       port: "{{ env_var('PGPORT', '5432') }}"
-      dbname: "{{ env_var('PGDATABASE', 'postgres') }}"
+      dbname: "{{ env_var('PGDATABASE', 'raw') }}"
       schema: "{{ env_var('PGSCHEMA', 'public') }}"
       sslmode: "{{ env_var('PGSSLMODE', 'require') }}"

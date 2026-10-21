@@ -1,7 +1,7 @@
-name: 'antojitos_transformations'
+﻿name: 'cooperativa_volcan'
 version: '1.0.0'
 
-profile: 'antojitos_transformations'
+profile: 'volcan_transformations'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -15,6 +15,10 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  antojitos_transformations:
-    +materialized: view
-
+  cooperativa_volcan:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts

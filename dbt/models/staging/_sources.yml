@@ -1,0 +1,73 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Tablas transaccionales OLTP en crudo de la Cooperativa Agrícola de café"
+    database: "{{ env_var('RAW_DB_NAME', 'raw') }}"
+    schema: "{{ env_var('RAW_SCHEMA', 'public') }}"
+    tables:
+      - name: fincas
+        description: "Catálogo de fincas productoras de café en Jinotega y regiones aledañas"
+        columns:
+          - name: id_finca
+            description: "Llave primaria de fincas"
+            tests:
+              - unique
+              - not_null
+
+      - name: variedades_cafe
+        description: "Variedades botánicas de café sembradas y sus perfiles base"
+        columns:
+          - name: id_variedad
+            description: "Llave primaria de variedades"
+            tests:
+              - unique
+              - not_null
+
+      - name: beneficios
+        description: "Centros de procesamiento y beneficio húmedo/seco"
+        columns:
+          - name: id_beneficio
+            description: "Llave primaria de beneficios"
+            tests:
+              - unique
+              - not_null
+
+      - name: cuadrillas_corte
+        description: "Cuadrillas asignadas a la recolección y corte del grano"
+        columns:
+          - name: id_cuadrilla
+            description: "Llave primaria de cuadrillas"
+            tests:
+              - unique
+              - not_null
+
+      - name: clima_zonas_cafetaleras
+        description: "Histórico de variables agroclimáticas zonales (precipitación, temperatura)"
+
+      - name: lotes_acopio
+        description: "Transacciones de acopio por lote, notas de catación y costos de recolección"
+        columns:
+          - name: id_lote
+            description: "Llave primaria del lote acopiado"
+            tests:
+              - unique
+              - not_null
+
+      - name: procesamiento_beneficio
+        description: "Registros operativos del procesamiento en planta de beneficio"
+        columns:
+          - name: id_proceso
+            description: "Llave primaria de procesamiento"
+            tests:
+              - unique
+              - not_null
+
+      - name: embarques_exportacion
+        description: "Registros de despacho y embarque de café hacia puertos de salida"
+        columns:
+          - name: id_embarque
+            description: "Llave primaria de embarques"
+            tests:
+              - unique
+              - not_null

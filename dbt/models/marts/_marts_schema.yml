@@ -1,0 +1,54 @@
+﻿version: 2
+
+models:
+  - name: dim_fincas
+    columns:
+      - name: id_finca
+        data_tests: [unique, not_null]
+  - name: dim_variedades
+    columns:
+      - name: id_variedad
+        data_tests: [unique, not_null]
+  - name: dim_beneficios
+    columns:
+      - name: id_beneficio
+        data_tests: [unique, not_null]
+  - name: dim_fecha
+    columns:
+      - name: fecha
+        data_tests: [unique, not_null]
+  - name: fct_lotes_acopio
+    columns:
+      - name: id_lote
+        data_tests: [unique, not_null]
+      - name: id_finca
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_fincas')
+                field: id_finca
+      - name: id_variedad
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_variedades')
+                field: id_variedad
+      - name: fecha
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_fecha')
+                field: fecha
+  - name: fct_embarques
+    columns:
+      - name: id_embarque
+        data_tests: [unique, not_null]
+      - name: id_lote
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_lotes_acopio')
+                field: id_lote
