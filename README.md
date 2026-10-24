@@ -1,4 +1,3 @@
-# integrador_practica4
 # De los datos a la decisión — Caso D: Cooperativa El Volcán
 
 Proyecto integrador (UNAN-Managua, Ciencia de Datos). Caso: **café de exportación**.
