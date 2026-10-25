@@ -1,0 +1,4 @@
+prueba,H0,H1,n,media,S,Z,regla_rechazo,decision
+Geisha,mu <= 90,mu > 90,148,92.511,3.045,10.034,Z > 1.645,Rechaza H0
+Region Madriz,mu >= 88,mu < 88,238,87.564,2.613,-2.573,Z < -1.645,Rechaza H0
+Altura HG,mu = 87,mu != 87,517,86.962,2.527,-0.342,Z < -1.960 o Z > 1.960,No rechaza H0
